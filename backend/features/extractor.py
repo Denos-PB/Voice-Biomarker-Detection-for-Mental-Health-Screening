@@ -10,7 +10,7 @@ from backend.data.loader import Recording
 def load_wave(path: Path, target_sr: int = 16_000, max_duration_s: int = 120) -> tuple[np.ndarray, int]:
     y,sr = librosa.load(path, sr=target_sr, mono=True)
     y,_ = librosa.effects.trim(y,top_db=30)
-    max_len=int(max_duration_s * sr)
+    max_len = int(max_duration_s * sr)
     if len(y) > max_len:
         y = y[:max_len]
     if np.max(np.abs(y)) > 0:
