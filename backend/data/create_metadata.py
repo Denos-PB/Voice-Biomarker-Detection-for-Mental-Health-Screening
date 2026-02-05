@@ -42,11 +42,13 @@ REPETITION_MAP = {
 }
 
 def main() -> None:
+    audio_root = Path("backend/data/raw/ravdess/audio").resolve()
+    metadata_path = audio_root.parent / "metadata.csv"
+
     rows = []
 
-    wav_files = list[Path](AUDIO_ROOT.glob("*.wav"))
-    mp4_files = list[Path](AUDIO_ROOT.glob("*.mp4"))
-    all_files = sorted(wav_files + mp4_files)
+    wav_files = list[Path](AUDIO_ROOT.rglob("*.wav"))
+    all_files = sorted(wav_files)
 
     if not all_files:
         raise FileNotFoundError(f"No audio files found under {AUDIO_ROOT}")
